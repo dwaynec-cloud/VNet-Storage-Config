@@ -2,7 +2,7 @@
 
 Hands-on Azure lab built for AZ-104 (Microsoft Azure Administrator) preparation. It covers Azure networking and storage security: extending an existing virtual network with a dedicated subnet, deploying a storage account with public network access disabled, and connecting it privately through a private endpoint with full private DNS integration. The environment is defined as Infrastructure-as-Code in Bicep and builds directly on the VM/RBAC environment from Project 1.
 
-> Related repos: [VM-RBAC-Config](https://github.com/waynethedon/VM-RBAC-Config) (Project 1) · [Monitoring-Backup-Config](https://github.com/waynethedon/Monitoring-Backup-Config) (Project 3) · [Entra-Identity-Config](https://github.com/waynethedon/Entra-Identity-Config) (Project 4) · [AppService-Config](https://github.com/waynethedon/AppService-Config) (Project 5) · [Storage-Recovery-Config](https://github.com/waynethedon/Storage-Recovery-Config) (Project 6)
+> Related repos: [VM-RBAC-Config](https://github.com/dwaynec-cloud/VM-RBAC-Config) (Project 1) · [Monitoring-Backup-Config](https://github.com/dwaynec-cloud/Monitoring-Backup-Config) (Project 3) · [Entra-Identity-Config](https://github.com/dwaynec-cloud/Entra-Identity-Config) (Project 4) · [AppService-Config](https://github.com/dwaynec-cloud/AppService-Config) (Project 5) · [Storage-Recovery-Config](https://github.com/dwaynec-cloud/Storage-Recovery-Config) (Project 6)
 
 > **Status:** the lab environment was torn down in October 2026 when the Azure free trial ended. This repo is kept as documentation of the build.
 
@@ -27,7 +27,7 @@ The VM sits in its own subnet with internet access blocked, and the private endp
 
 **Chose full VNet isolation over allowing outbound internet.** The project spec asked for explicit inbound and outbound restrictions. I chose the stricter option, denying all outbound internet and allowing only VNet-internal traffic, over a looser one that would also have allowed OS updates. The tradeoff is stronger isolation at the cost of the VM being unable to reach the internet at all, including its own package repositories.
 
-> **Later change (Project 3):** this posture also blocked the Azure Monitor Agent. Project 3 added outbound allow rules for the `AzureMonitor`, `AzureResourceManager`, and `AzureActiveDirectory` service tags at a higher priority than the Deny rule. General internet access stayed blocked. See [Monitoring-Backup-Config](https://github.com/waynethedon/Monitoring-Backup-Config).
+> **Later change (Project 3):** this posture also blocked the Azure Monitor Agent. Project 3 added outbound allow rules for the `AzureMonitor`, `AzureResourceManager`, and `AzureActiveDirectory` service tags at a higher priority than the Deny rule. General internet access stayed blocked. See [Monitoring-Backup-Config](https://github.com/dwaynec-cloud/Monitoring-Backup-Config).
 
 **The Portal and the CLI behaved differently for the same task, twice.**
 - Creating the private endpoint in the Portal was blocked by Project 1's tag-enforcement policy, because the wizard couldn't tag the network interface it creates automatically for the endpoint. The same operation through Azure CLI, with the tag supplied, succeeded.
@@ -59,10 +59,10 @@ The VM sits in its own subnet with internet access blocked, and the private endp
 
 ## How to deploy
 
-This template assumes Project 1's VNet already exists (see [VM-RBAC-Config](https://github.com/waynethedon/VM-RBAC-Config)).
+This template assumes Project 1's VNet already exists (see [VM-RBAC-Config](https://github.com/dwaynec-cloud/VM-RBAC-Config)).
 
 ```bash
-git clone https://github.com/waynethedon/VNet-Storage-Config.git
+git clone https://github.com/dwaynec-cloud/VNet-Storage-Config.git
 cd VNet-Storage-Config
 az login
 
